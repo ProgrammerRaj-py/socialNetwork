@@ -29,7 +29,7 @@
                 {% endif %}
             </div>
             <div class="profiledata">
-                <h1><a href="{% url 'userac:user_profile' profile.user %}">{{ profile.user }}</a>
+                <h1><a href="{% url 'userac:user_profile' profile.user %}">{{ profile.user }}</a> 
                     {% if profile.user != request.user and profilefollowed != True %}
                         <a class="edit" href="{% url 'userac:follow' profile.user %}">Follow</a>
                     {% elif profile.user != request.user and profilefollowed %}
@@ -38,22 +38,29 @@
                         <a class="edit" href="#">Edit</a>
                     {% endif %}
                 </h1>
-                <p>{{ totalpost}} posts <span class="followers"><a href="{% url 'userac:show_follower' profile.user %}">{{ follower }} followers</a></span><a href="{% url 'userac:show_following' profile.user %}">{{ followed }} following</a></p>
+                <p>{{ totalpost}} posts <span class="followers"><a href="{% url 'userac:user_profile' profile.user %}">{{ follower }} followers</a></span><a href="{% url 'userac:show_following' profile.user %}">{{ followed }} following</a></p>
                 <h3 class="username">{{ profile.user.first_name }} {{ profile.user.last_name }}</h3>
                 <p class="profilebio">{{ profile.bio }}</p>
             </div>
         </section>
-        <section class="profileposts">
-            {% for post in posts %}
-                <div class="row">
-                    {% for i in post %}
-                        {% if i.image %}
-                            <div class="col">
-                                <img src="{{ i.image.url }}" alt="posts">
-                            </div>
+        <section class="following">
+            {% for flw in followers %}
+            {% for prf in allprofiles %}
+            {% if flw == prf.user %}
+            <div class="profile">
+                <div class="names">
+                    <div class="dp">
+                        {% if prf.userimg %}
+                            <img src="{{ prf.userimg.url }}" alt="Profile Image">
+                        {% else %}
+                            <img src="{% static 'userac/images/profile.png' %}" alt="Profile Image">
                         {% endif %}
-                    {% endfor %}
+                    </div>
+                    <h1>{{ flw.username }}<br><span>{{ flw.first_name }} {{flw.last_name }}</span></h1>    
                 </div>
+            </div>
+            {% endif %}
+            {% endfor %}
             {% endfor %}
         </section>
     </main>

@@ -1,0 +1,51 @@
+{% extends "userac/base.html" %}
+{% load static %}
+{% block title %}Search{% endblock title %}
+{% block body %}
+    <main id="main">
+        <nav>
+            <h1 class="logo"><a href="{% url 'userac:index' %}">Social Network</a></h1>
+            <form action="{% url 'userac:searchuser' %}" method="POST" id="searchbox">
+                {% csrf_token %}
+                <input type="search" name="username" id="searchuser">
+                <input type="submit" value="Search">
+            </form>
+            <ul class="nav-links">
+                <li><a href="{% url 'userac:index' %}"><i class="fas fa-home"></i></a></li>
+                <li><a href="#"><i class="fas fa-heart"></i></a></li>
+                <li class="dropdown-icon"><i class="fas fa-user-alt"></i></li>
+                <ul id="dropdown">
+                    <li><a href="{% url 'userac:user_profile' request.user %}"><i class="fas fa-user-alt"></i> Profile</a></li>
+                    <li class="last"><a href="{% url 'userac:user_logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </ul>
+        </nav>
+        <section class="following">
+            {% for obj in profile %}
+            {% for qur in queryset %}
+            {% if obj.user == qur %}
+            <div class="profile">
+                <div class="names">
+                    <div class="dp">
+                        {% if obj.userimg %}
+                        <img src="{{ obj.userimg.url }}" alt="Profile Image">
+                        {% else %}
+                        <img src="{% static 'userac/images/profile.png' %}" alt="Profile Image">
+                        {% endif %}
+                    </div>
+                    <h1><a href="{% url 'userac:user_profile' qur.username %}">{{ qur.username }}</a><br><span>{{ qur.first_name }} {{qur.last_name }}</span></h1>    
+                </div>
+                {% if obj.user == request.user %}
+                <a></a>
+                {% elif obj.user in followed %}
+                <a href="{% url 'userac:follow' qur.username %}" class="delbtn">Following</a>
+                {% else %}
+                <a href="{% url 'userac:follow' qur.username %}" class="delbtn">Follow</a>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+        </section>
+    </main>
+{% endblock body %}

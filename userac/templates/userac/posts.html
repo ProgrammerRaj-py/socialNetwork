@@ -5,6 +5,11 @@
     <main id="main">
         <nav>
             <h1 class="logo"><a href="{% url 'userac:index' %}">Social Network</a></h1>
+            <form action="{% url 'userac:searchuser' %}" method="POST" id="searchbox">
+                {% csrf_token %}
+                <input type="search" name="username" id="searchuser">
+                <input type="submit" value="Search">
+            </form>
             <ul class="nav-links">
                 <li><a href="{% url 'userac:index' %}"><i class="fas fa-home"></i></a></li>
                 <li><a href="#"><i class="fas fa-heart"></i></a></li>

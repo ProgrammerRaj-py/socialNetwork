@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.db.models.query import QuerySet
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from .models import Allposts, Like, Allcomment, Follow_Unfollow, Profile
@@ -43,7 +44,7 @@ def createPost(request):
 def user_profile(request, username):
     user = User.objects.filter(username=username)
     mainfollowed = Follow_Unfollow.objects.get(user=request.user)
-    print(user[0], mainfollowed.get_followed().all())
+    # print(user[0], mainfollowed.get_followed().all())
     if user[0] in mainfollowed.get_followed().all():
         profilefollowed = True
     else:
@@ -104,4 +105,74 @@ def follow(request, username):
         Follow_Unfollow.follow(user, to_follow)
         Follow_Unfollow.add_follower(to_follow, user)
     
-    return redirect("/accounts/")
+    return redirect("/")
+
+
+def show_following(request, username):
+    user = User.objects.filter(username=username)
+    mainfollowed = Follow_Unfollow.objects.get(user=request.user)
+    if user[0] in mainfollowed.get_followed().all():
+        profilefollowed = True
+    else:
+        profilefollowed = False
+    if user:
+        profile = Profile.objects.get(user__in=user)
+        allprofiles = Profile.objects.all()
+        posts = Allposts.objects.filter(user__in=user).order_by("-pk")
+        followed = Follow_Unfollow.objects.filter(user__in=user)
+        totalfollowed = followed[0].followed.all()
+        totalfollower = followed[0].follower.all()
+        return render(request, "userac/following.html",{
+                "totalpost": len(posts),
+                "profile" : profile,
+                "allprofiles" : allprofiles,
+                "profilefollowed" : profilefollowed,
+                "followed" : len(totalfollowed),
+                "follower" : len(totalfollower),
+                "followings" : totalfollowed,
+            })
+    else:
+        return redirect("/accounts/")
+
+def show_follower(request, username):
+    user = User.objects.filter(username=username)
+    mainfollowed = Follow_Unfollow.objects.get(user=request.user)
+    if user[0] in mainfollowed.get_followed().all():
+        profilefollowed = True
+    else:
+        profilefollowed = False
+    if user:
+        profile = Profile.objects.get(user__in=user)
+        allprofiles = Profile.objects.all()
+        posts = Allposts.objects.filter(user__in=user).order_by("-pk")
+        followed = Follow_Unfollow.objects.filter(user__in=user)
+        totalfollowed = followed[0].followed.all()
+        totalfollower = followed[0].follower.all()
+
+        return render(request, "userac/follower.html",{
+                "totalpost": len(posts),
+                "profile" : profile,
+                "allprofiles" : allprofiles,
+                "profilefollowed" : profilefollowed,
+                "followed" : len(totalfollowed),
+                "follower" : len(totalfollower),
+                "followings" : totalfollowed,
+                "followers" : totalfollower,
+            })
+    else:
+        return redirect("/accounts/")
+
+def find_user(request):
+    if request.method == "POST":
+        username = request.POST.get("username","")
+        queryset = User.objects.filter(username__icontains=username)
+        profile = Profile.objects.all()
+        followed = Follow_Unfollow.objects.get(user=request.user)
+        print(username)
+        print(followed.followed.all())
+        return render(request, "userac/search.html",{
+            "queryset" : queryset,
+            "profile" : profile,
+            "followed" : followed.followed.all()
+        })
+
