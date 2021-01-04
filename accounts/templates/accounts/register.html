@@ -1,0 +1,32 @@
+{% extends "accounts/base.html" %}
+{% block title %}Register{% endblock title %}
+{% block body %}
+    <main id="main">
+        <div class="rightdiv width-60">
+            {% if messages %}
+                {% for mess in messages %}
+                    <p id="massage{{ mess.tags }}">{{ mess.tags }}{{ mess }}</p>
+                {% endfor %}
+            {% endif %}
+            <h1>Or Create an account</h1>
+            <form action="{% url 'accounts:register_user' %}" method="POST">
+                {% csrf_token %}
+                <input type="text" name="username" id="registerusername" placeholder="Your username" required>
+                <input type="text" name="fullname" id="fullname" placeholder="Full name" required>
+                <input type="password" name="password" id="registerpassword" placeholder="Password" required>
+                <input type="password" name="cnfpassword" id="cnfpassword" placeholder="Confirm password" required>
+                <button type="submit" id="regbtn">Register</button>
+            </form>
+            <!-- <a href="#" class="fgpass">Forgot password?</a> -->
+        </div>
+        <div class="leftdiv width-40">
+            <h1 class="logo"><a href="{% url 'accounts:index' %}">social Network</a></h1>
+            <div class="width-40-div">
+                <h1>Welcome</h1>
+                <h2>Login to Social account here</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error doloremque nulla illum, quibusdam <br> ea nobis! Corporis totam doloribus sunt, nostrum fugiat odio inventore! Velit in nulla fugit perspiciatis  <br> tenetur, quos quidem tempora iste, <br> doloremque dolore recusandae est, ratione fuga eaque deleniti aliquid aut</p>
+                <a href="{% url 'accounts:index' %}">Login</a>
+            </div>
+        </div>
+    </main>
+{% endblock body %}

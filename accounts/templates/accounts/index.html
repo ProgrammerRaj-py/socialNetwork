@@ -1,0 +1,30 @@
+{% extends "accounts/base.html" %}
+{% block title %}Login{% endblock title %}
+{% block body %}
+    <main id="main">
+        <div class="leftdiv">
+            <h1 class="logo"><a href="{% url 'accounts:index' %}">Social Network</a></h1>
+            <div>
+                <h1>Welcome</h1>
+                <h2>Register for an Social account here</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error doloremque nulla illum, quibusdam <br> ea nobis! Corporis totam doloribus sunt, nostrum fugiat odio inventore! <br> Velit in nulla fugit perspiciatis tenetur, quos quidem tempora iste, <br> doloremque dolore recusandae est, ratione fuga eaque deleniti aliquid aut</p>
+                <a href="{% url 'accounts:register_user' %}">REGISTER HERE</a>
+            </div>
+        </div>
+        <div class="rightdiv">
+            {% if messages %}
+                {% for mess in messages %}
+                    <p id="message{{ mess.tags }}">{{ mess.tags }}: {{ mess }}</p>
+                {% endfor %}
+            {% endif %}
+            <h1>Or login to your account</h1>
+            <form action="{% url 'accounts:index' %}" method="POST">
+                {% csrf_token %}
+                <input type="text" name="username" id="username" placeholder="Your username" required>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <a href="#" class="fgpass">Forgot password?</a>
+        </div>
+    </main>
+{% endblock body %}

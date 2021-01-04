@@ -1,0 +1,128 @@
+{% extends "userac/base.html" %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block body %}
+    <main id="main">
+        <nav>
+            <h1 class="logo"><a href="{% url 'userac:index' %}">Social Network</a></h1>
+            <ul class="nav-links">
+                <li><a href="{% url 'userac:index' %}"><i class="fas fa-home"></i></a></li>
+                <li><a href="#"><i class="fas fa-heart"></i></a></li>
+                <li class="dropdown-icon"><i class="fas fa-user-alt"></i></li>
+                <ul id="dropdown">
+                    <li><a href="{% url 'userac:user_profile' request.user %}"><i class="fas fa-user-alt"></i> Profile</a></li>
+                    <li class="last"><a href="{% url 'userac:user_logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </ul>
+        </nav>
+        <section id="allposts">
+            <section id="post">
+                <div class="createpost">
+                    <div class="profile">
+                        <div class="dp">
+                            <img src="{% static 'userac/images/profile.png' %}" alt="Profile Picture">
+                        </div>
+                        <h1><a href="{% url 'userac:user_profile' request.user %}">{{ request.user }}</a><br><span>{{ request.user.first_name }} {{ request.user.last_name }}</span></h1>
+                    </div>
+                    <div class="selections">
+                        <form action="{% url 'userac:createPost' %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="textarea">
+                                <textarea name="createposttext" rows="3" id="createposttext" placeholder="What's on your mind ?"></textarea>
+                            </div>
+                            <div class="comt">
+                                <label for="createpostimg"><i class="fas fa-image"></i></label>
+                                <input type="file" name="createpostimg" id="createpostimg">
+                                <input type="submit" value="Post">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {% for post in posts %}
+                <div class="post">
+                    <div class="profile">
+                        <div class="names">
+                            <div class="dp">
+                                <img src="{% static 'userac/images/profile.png' %}" alt="Profile Picture">
+                            </div>
+                            <h1><a href="{% url 'userac:user_profile' post.user %}">{{ post.user }}</a>
+                                {% if request.user != post.user %}
+                                    <a href="{% url 'userac:follow' post.user %}" style="margin-left: 0.5rem; font-weight: 500;">Follow</a>
+                                {% endif %}  
+                                <br><span>{{ post.date.date }} {{ post.date.time }}</span></h1>  
+                        </div>
+                        {% if post.user == request.user %}
+                            <a href="{% url 'userac:delete_post' post.id %}" class="delbtn">Delete</a>
+                        {% endif %}
+                    </div>
+                    {% if post.image %}
+                        <div class="postimg">
+                            <img src="{{ post.image.url }}" alt="Post">
+                        </div>
+                    {% endif %}
+                    <div class="likes">
+                        <ul>
+                            <li><a href="{% url 'userac:like_dislike_post' post.id %}"><i class="far fa-heart"></i></a></li>
+                            <li><a href="#"><i class="far fa-comment"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="totallikes">
+                        <h1>Liked by {{ post.like.user.all.count }} peoples</h1>
+                    </div>
+                    {% if post.caption %}
+                        <div class="caption">
+                            <p>{{ post.caption }}</p>
+                        </div>
+                    {% endif %}
+                    <div class="comment">
+                        <p class="totalcmt" id="totalcmt">View all {{ post.comments.all.count }} comments</p>
+                        <div id="allcomments">
+                            {% for comment in comments %}
+                                {% if comment.post == post  %}
+                                    <ul class="fstul">
+                                        <li>
+                                            <div class="profile">
+                                                <div class="names">
+                                                    <div class="dp">
+                                                        <img src="{% static 'userac/images/profile.png' %}" alt="Profile Picture">
+                                                    </div>
+                                                    <h1>{{ comment.user }}<br><span>{{ comment.date }}</span></h1>   
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <ul class="scndul">
+                                            <li><p>{{ comment.comment }}</p></li>
+                                        </ul>
+                                    </ul>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <form action="{% url 'userac:add_comment' post.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="text" name="commenttext" id="commenttext" placeholder="Comment">
+                            <input type="submit" value="Comment">
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </section>
+            <section id="suggested">
+                <div class="heading">
+                    <h1>Suggestions for you</h1>
+                    <a href="#">See All</a>
+                </div>
+                <ul>
+                    <li>
+                        <div class="profile">
+                            <div class="dp">
+                                <img src="{% static 'userac/images/profile.jpg' %}" alt="Profile Picture">
+                            </div>
+                            <h1><a href="#"><a href="#">akash_208</a></a><br><span>Follows you</span></h1>
+                        </div>
+                        <a href="#">Follow</a>
+                    </li>
+                </ul>
+            </section>
+        </section>
+    </main>
+{% endblock body %}

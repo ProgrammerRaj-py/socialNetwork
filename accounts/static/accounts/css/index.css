@@ -1,0 +1,350 @@
+/* color #00A876 */
+/* color #151A22 */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+a{
+    text-decoration: none;
+}
+
+/* ======================Login Page========================= */
+#main{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+.leftdiv{
+    width: 60%;
+    height: 100%;
+    padding: 5rem ;
+    background-color: #151A22;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.leftdiv h1{
+    color: #f4f4f4;
+    font-weight: lighter;
+}
+.leftdiv .logo{
+    margin-top: -7rem;
+    font-weight: 400;
+    font-size: 1.2rem;
+}
+.leftdiv .logo a{
+    color: #00A876 !important;
+}
+.leftdiv div h1{
+    font-size: 4rem;
+}
+.leftdiv div{
+    margin-top: 8rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.leftdiv div h2{
+    margin: 0.1rem 0 2.5rem 0;
+    color: rgb(95, 95, 95);
+    font-weight: 200;
+}
+.leftdiv div p{
+    margin-bottom: 4rem;
+    color: rgb(73, 73, 73);
+}
+.leftdiv div a{
+    background-color: #00A876;
+    border: 2px solid #00A876;
+    display: block;
+    width: 180px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f4f4f4;
+    letter-spacing: 1px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.leftdiv div a:hover{
+    background-color: transparent;
+}
+.rightdiv{
+    width: 40%;
+    height: 100%;
+    background-color: #00A876;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #f4f4f4;
+}
+#messagesuccess{
+    margin-bottom: 8rem;
+    color: #f4f4f4;
+}
+#messageerror{
+    margin-bottom: 8rem;
+    color: #df1313;
+}
+.rightdiv h1{
+    font-weight: 200;
+    font-size: 2.3rem;
+}
+.rightdiv form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 5rem;
+}
+.rightdiv form input[type="text"],
+.rightdiv form input[type="password"]{
+    background-color: #00A876;
+    border: none;
+    border-bottom: 1px solid #f4f4f4c7;
+    outline: none;
+    width: 400px;
+    color: #f4f4f4;
+    font-size: 1.2rem;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    margin-bottom: 3rem;
+}
+.rightdiv form input[type="text"]::placeholder,
+.rightdiv form input[type="password"]::placeholder{
+    color:#f4f4f4c7;
+}
+.rightdiv form button[type="submit"]{
+    width: 400px;
+    height: 50px;
+    border-radius: 15px;
+    background-color: #f4f4f4;
+    border: 2px solid #f4f4f4;
+    cursor: pointer;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    color: #00A876;
+    margin-bottom: 5rem;
+}
+.rightdiv form button[type="submit"]:disabled{
+    opacity: 0.3;
+    cursor: auto;
+}
+.rightdiv .fgpass{
+    display: inline-block;
+    color: #f4f4f4c7;
+    cursor: pointer;
+}
+/* ======================Login Page end========================= */
+/* ======================Register Page ========================= */
+.width-60{
+    width: 60% !important;
+}
+.width-40{
+    width: 40% !important;
+    text-align: center !important;
+    align-items: center !important;
+}
+.width-40-div{
+    align-items: center !important;
+}
+#registerusername,
+#fullname,
+#registerpassword,
+#cnfpassword,
+#regbtn{
+    width: 500px;
+}
+#regbtn[type="submit"]:disabled{
+    opacity: 0.3;
+    cursor: auto;
+}
+/* ======================Register Page end========================= */
+
+/* Media Query */
+@media screen and (max-width: 576px){
+    #main{
+        height: auto;
+        flex-direction: column;
+    }
+    .leftdiv{
+        width: 100%;
+        text-align: center;
+    }
+    .leftdiv .logo{
+        margin-top: 0rem;
+        font-size: 1.4rem;
+    }
+    .leftdiv div h1{
+        font-size: 3rem;
+    }
+    .leftdiv div{
+        margin-top: 4rem;
+    }
+    .leftdiv div h2{
+        font-size: 1rem;
+    }
+    .leftdiv div a{
+        width: 130px;
+        height: 50px;
+        font-size: 0.8rem;
+    }
+
+    .rightdiv{
+        width: 100%;
+        height: auto;
+        padding: 10rem 5rem;
+    }
+    .rightdiv h1{
+        font-size: 1.4rem !important;
+    }
+    .rightdiv form input[type="text"],
+    .rightdiv form input[type="password"]{
+    width: 350px;
+    font-size: 1rem;
+    }
+    .rightdiv form button[type="submit"]{
+        width: 350px;
+    }
+    #registerusername,
+    #fullname,
+    #registerpassword,
+    #cnfpassword,
+    #regbtn{
+        width: 450px;
+    }
+}
+@media screen and (max-width: 786px){
+    #main{
+        height: auto;
+        flex-direction: column;
+    }
+    .leftdiv{
+        width: 100% !important;
+        text-align: center;
+    }
+    .leftdiv .logo{
+        margin-top: 0rem;
+        font-size: 1.4rem;
+    }
+    .leftdiv div h1{
+        font-size: 3rem;
+    }
+    .leftdiv div{
+        margin-top: 4rem;
+    }
+    .leftdiv div h2{
+        font-size: 1rem;
+    }
+    .leftdiv div a{
+        width: 130px;
+        height: 50px;
+        font-size: 0.8rem;
+    }
+
+    .rightdiv{
+        width: 100% !important;
+        padding: 10rem 5rem;
+    }
+    .rightdiv h1{
+        font-size: 1.5rem;
+    }
+    .rightdiv form input[type="text"],
+    .rightdiv form input[type="password"]{
+        width: 350px;
+        font-size: 1rem;
+    }
+    .rightdiv form button[type="submit"]{
+        width: 350px;
+    }
+
+    #registerusername,
+    #fullname,
+    #registerpassword,
+    #cnfpassword,
+    #regbtn{
+        width: 450px;
+    }
+}
+@media screen and (max-width: 900px){
+    .leftdiv div p{
+        margin-bottom: 2rem;
+    }
+    #registerusername,
+    #fullname,
+    #registerpassword,
+    #cnfpassword,
+    #regbtn{
+        width: 370px;
+    }
+}
+@media screen and (max-width: 992px){
+    .leftdiv{
+        width: 100%;
+        text-align: center;
+        padding: 3rem;
+    }
+    .leftdiv .logo{
+        margin-top: 0rem;
+        font-size: 1.4rem;
+    }
+    .leftdiv div h1{
+        font-size: 2rem;
+    }
+    .leftdiv div{
+        margin-top: 1rem;
+        align-items: center;
+    }
+    .leftdiv div h2{
+        font-size: 1rem;
+    }
+    .leftdiv div a{
+        width: 130px;
+        height: 50px;
+        font-size: 0.8rem;
+    }
+
+    .rightdiv{
+        width: 100%;
+        height: auto;
+        padding: 10rem 5rem;
+    }
+    .rightdiv h1{
+        font-size: 1.5rem;
+    }
+    .rightdiv form input[type="text"],
+    .rightdiv form input[type="password"]{
+        width: 350px;
+        font-size: 1rem;
+    }
+    .rightdiv form button[type="submit"]{
+        width: 350px;
+    }
+}
+@media screen and (max-width: 1200px){
+    .leftdiv div{
+        margin-top: 4rem;
+    }
+
+    .rightdiv h1{
+        font-size: 1.8rem;
+    }
+    .rightdiv form input[type="text"],
+    .rightdiv form input[type="password"]{
+        width: 330px;
+        font-size: 1rem;
+    }
+    .rightdiv form button[type="submit"]{
+        width: 330px;
+    }
+}
+@media screen and (min-width: 1200px){
+    .leftdiv div{
+        margin-top: 4rem;
+    }
+}

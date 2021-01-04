@@ -1,0 +1,10 @@
+{% extends "userac/base.html" %}
+{% load static %}
+{% block title %}Raj Mazumder{% endblock title %}
+{% block body %}
+    {{ post.image.url }}
+    {{ post.user }}
+    {% for comment in comments %}
+        <h1>{{ comment.user }}</h1>
+    {% endfor %}
+{% endblock body %}

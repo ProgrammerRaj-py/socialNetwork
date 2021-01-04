@@ -1,0 +1,434 @@
+/* color #00A876 */
+/* color #151A22 */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+a{
+    color: #000;
+    text-decoration: none;
+}
+ul{
+    list-style: none;
+}
+#main{
+    max-width: 1000px;
+    width: 1000px;
+    margin: auto;
+}
+.bgcolor{
+    background-color: #f1f0f0;
+}
+#main nav{ 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 8vh;
+    border-bottom: 1px solid #dcdcdc;
+    background-color: #f1f0f0;
+}
+#main nav .logo{
+    font-weight: 300;
+    font-size: 1.4rem;
+}
+#main nav .logo a{
+    color: #00A876;
+}
+#main nav .nav-links{
+    display: flex;
+    position: relative;
+}
+#main nav .nav-links li{
+    margin-left: 2rem;
+}
+#main nav .nav-links li i{
+    font-size: 1.3rem;
+    transition: 0.3s;
+    cursor: pointer;
+    color: #00A876;
+}
+#main nav .nav-links ul li a{
+    cursor: pointer;
+    transition: 0.3s;
+}
+#main nav .nav-links ul li a:hover{
+    text-decoration: underline;
+}
+#main nav .nav-links li i:hover{
+    color: #000;
+}
+#dropdown{
+    opacity: 0;
+    position: absolute;
+    width: 150px;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 48px;
+    margin-left: 60px;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    transition: 0.3s;
+    background-color: #fff;
+}
+#main nav .nav-links ul li{
+    margin-top: 2rem;
+    margin-left: 0;
+}
+#main nav .nav-links ul li.last{
+    margin-bottom: 2rem;
+}
+#main nav .nav-links ul li i{
+    margin-right: 1rem;
+    font-size: 1.3rem;
+}
+.dropdown-icon:hover ~ #dropdown{
+    opacity: 1;
+}
+#dropdown:hover{
+    opacity: 1;
+}
+
+/* +++++++++++++++= allposts =+++++++++++++++++= */
+#allposts{
+    /* background-color: blueviolet; */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+#post{
+    width: 100%;
+    margin-top: 1rem;
+}
+.createpost,
+.post{
+    width: 100%;
+    margin-bottom: 1.5rem;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    border-radius: 10px;
+}
+.createpost .profile,
+#suggested .profile{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    margin: 0.5rem 0.7rem;
+}
+.createpost .profile .dp,
+.post .profile .dp,
+#suggested .profile .dp{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 5px solid #dcdcdc;
+}
+.createpost .profile .dp img,
+.post .profile .dp img,
+#suggested .profile .dp img{
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.createpost .profile h1,
+.post .profile h1,
+#suggested .profile h1{
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+}
+.createpost .profile h1 span{
+    font-weight: 300;
+}
+.createpost .selections{
+    width: 100%;
+}
+.createpost .selections form{
+    display: flex;
+    flex-direction: column;
+}
+.createpost .selections form textarea{
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 1rem;
+    font-weight: 300;
+    font-size: 1rem;
+    resize: none;
+}
+.createpost .selections form .comt{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-top: 1px solid #dcdcdc;
+    border-radius: 15px;
+}
+.createpost .selections label{
+    margin-left: 1rem;
+}
+.createpost .selections label i{
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+#createpostimg{
+    display: none;
+}
+.createpost .selections form input[type="submit"]{
+    width: 75px;
+    height: 30px;
+    margin-right: 1rem;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    background-color: #00A876;
+    color: #fff;
+    cursor: pointer;
+}
+/* +++++++++++++++= Post =+++++++++++++++++= */
+.post .profile {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    margin: 1rem 0.7rem;
+    justify-content: space-between;
+    align-items: center;
+}
+.post .profile .names{
+    display: flex;
+}
+.post .profile .dp{
+    display: flex !important;
+}
+.delbtn{
+    width: 75px;
+    height: 30px;
+    margin-right: 2rem;
+    outline: none;
+    font-size: 0.8rem;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-color: #00A876;
+    color: #fff;
+    cursor: pointer;
+}
+
+.post .profile h1 span{
+    font-weight: 300;
+    font-size: 0.8rem;
+}
+.post .postimg{
+    width: 100%;
+    height: 650px;
+}
+.post .postimg img{
+    width: 100%;
+    height: 100%;
+    object-position: center;
+    object-fit: cover;
+}
+.likes{
+    width: 100%;
+    margin: 1rem 0 0.4rem;
+}
+.likes ul{
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+.likes ul li{
+    margin-right: 1.5rem;
+}
+.likes ul li i{
+    font-size: 1.4rem;
+}
+.post .totallikes h1{
+    font-size: 1rem;
+    margin-left: 1rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+}
+/* +++++++++++++++= caption =+++++++++++++++++= */
+.caption{
+    width: 100%;
+    padding: 0 1rem;
+}
+.caption p{
+    font-weight: 300;
+}
+/* +++++++++++++++= comment =+++++++++++++++++= */
+.comment{
+    width: 100%;
+    padding: 1rem;
+}
+.comment .totalcmt{
+    display: inline-block;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-weight: 300;
+    color: #505050;
+    cursor: pointer;
+}
+.comment .totalcmt:hover{
+    text-decoration: underline;
+}
+.comment form{
+    display: flex;
+    border-radius: 15px;
+    padding: 1rem 0;
+    border-top: 1px solid #dcdcdc;
+    justify-content: space-between;
+    align-items: center;
+}
+.comment form input[type="text"]{
+    width: 70%;
+    padding-left: 1rem;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #dcdcdc;
+}
+.comment form input[type="submit"]{
+    width: 100px;
+    height: 30px;
+    margin-right: 1rem;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    background-color: #00A876;
+    color: #fff;
+    cursor: pointer;
+}
+/* +++++++++++++++= allcomment =+++++++++++++++++= */
+#allcomments{
+    width: 100%;
+    padding-bottom: 2rem;
+}
+#allcomments .scndul{
+    margin-left: 4.5rem;
+}
+#allcomments .fstul li{
+    display: flex;
+    justify-content: space-between;
+}
+#allcomments .fstul p{
+    color: #6e6e6e;
+    font-weight: 300;
+    font-size: 0.9rem;
+}
+#allcomments .fstul .date{
+    margin-left: 5rem;
+}
+#allcomments .scndul p{
+    margin-top: 5px;
+}
+/* +++++++++++++++= Suggested =+++++++++++++++++= */
+#suggested{
+    width: 40%;
+    margin-top: 5rem;
+    margin-left: 3rem;
+    padding-right: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+#suggested .heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+}
+#suggested .heading h1{
+    font-weight: 300;
+    color: #6e6e6e;
+}
+#suggested .heading a{
+    display: inline-block;
+    border: 2px solid #6e6e6e;
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#suggested ul li{
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+#suggested .profile h1 span{
+    font-weight: 200;
+}
+
+
+
+
+/* +++++++++++++++= Media =+++++++++++++++++= */
+/* Media Query */
+@media screen and (max-width: 576px){
+    #main{
+        width: 100%;
+        padding: 0 1.3rem;
+    }
+    #main nav{
+        height: 7vh;
+    }
+    #dropdown{
+        margin-top: 40px;
+        margin-left: 20px;
+    }
+    .post .postimg{
+        height: 400px;
+    }
+    
+}
+@media screen and (max-width: 786px){
+    #main{
+        width: 100%;
+        padding: 0 1.5rem;
+    }
+    #suggested{
+        display: none;
+    }
+}
+@media screen and (min-width: 786px){
+    .post .postimg{
+        height: 500px;
+    }
+    #post{
+        width: 60%;
+        margin-top: 1rem;
+    }
+}
+@media screen and (max-width: 900px){
+    #main{
+        width: 100%;
+        padding: 0 2rem;
+    }
+    
+}
+@media screen and (max-width: 992px){
+    #main{
+        width: 100%;
+        padding: 0 1.5rem;
+    }
+}
+@media screen and (max-width: 1200px){
+    #main{
+        width: 100%;
+        padding: 0 1.5rem;
+    }
+}
