@@ -25,7 +25,11 @@
                 <div class="createpost">
                     <div class="profile">
                         <div class="dp">
+                            {% if mainprofile.userimg %}
+                            <img src="{{ mainprofile.userimg.url }}" alt="Profile Picture">
+                            {% else %}
                             <img src="{% static 'userac/images/profile.png' %}" alt="Profile Picture">
+                            {% endif %}
                         </div>
                         <h1><a href="{% url 'userac:user_profile' request.user %}">{{ request.user }}</a><br><span>{{ request.user.first_name }} {{ request.user.last_name }}</span></h1>
                     </div>
@@ -44,22 +48,27 @@
                     </div>
                 </div>
                 {% for post in posts %}
+                {% for prof in allprofiles %}
+                {% if post.user == prof.user %}
                 <div class="post">
                     <div class="profile">
                         <div class="names">
                             <div class="dp">
+                            {% if prof.userimg %}
+                                <img src="{{ prof.userimg.url }}" alt="Profile Picture">
+                            {% else %}
                                 <img src="{% static 'userac/images/profile.png' %}" alt="Profile Picture">
+                            {% endif %}
                             </div>
-                            <h1><a href="{% url 'userac:user_profile' post.user %}">{{ post.user }}</a>
-                                {% if request.user != post.user %}
-                                    <a href="{% url 'userac:follow' post.user %}" style="margin-left: 0.5rem; font-weight: 500;">Follow</a>
-                                {% endif %}  
+                            <h1><a href="{% url 'userac:user_profile' post.user %}">{{ post.user }}</a> 
                                 <br><span>{{ post.date.date }} {{ post.date.time }}</span></h1>  
                         </div>
                         {% if post.user == request.user %}
                             <a href="{% url 'userac:delete_post' post.id %}" class="delbtn">Delete</a>
                         {% endif %}
                     </div>
+                    {% endif %}
+                    {% endfor %}
                     {% if post.image %}
                         <div class="postimg">
                             <img src="{{ post.image.url }}" alt="Post">
@@ -67,7 +76,11 @@
                     {% endif %}
                     <div class="likes">
                         <ul>
+                            {% if request.user in post.like.user.all %}
+                            <li><a href="{% url 'userac:like_dislike_post' post.id %}"><i class="fas fa-heart" style="color: red;"></i></a></li>
+                            {% else %}
                             <li><a href="{% url 'userac:like_dislike_post' post.id %}"><i class="far fa-heart"></i></a></li>
+                            {% endif %}
                             <li><a href="#"><i class="far fa-comment"></i></a></li>
                         </ul>
                     </div>

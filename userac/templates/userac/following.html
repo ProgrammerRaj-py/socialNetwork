@@ -58,7 +58,7 @@
                     </div>
                     <h1>{{ flw.username }}<br><span>{{ flw.first_name }} {{flw.last_name }}</span></h1>    
                 </div>
-                <a href="{% url 'userac:follow' flw %}" class="delbtn">Following</a>
+                <a href="{% url 'userac:follow' flw %}" class="delbtn">Unfollow</a>
             </div>
             {% endif %}
             {% endfor %}

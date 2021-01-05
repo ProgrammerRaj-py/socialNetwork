@@ -8,15 +8,18 @@ from .models import Allposts, Like, Allcomment, Follow_Unfollow, Profile
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
+        mainprofile = Profile.objects.get(user=request.user)
+        allprofiles = Profile.objects.all()
         user = Follow_Unfollow.objects.get(user=request.user)
         followed_user = [i for i in user.followed.all()]
         followed_user.append(request.user)
-        comments = Allcomment.objects.all().order_by("-pk")[:2]
+        comments = Allcomment.objects.all().order_by("-pk")[:3]
         post = Allposts.objects.filter(user__in=followed_user).order_by("-pk")
-        # post = Allposts.objects.all().order_by("-pk")
         return render(request, "userac/posts.html",{
             "comments" : comments,
             "posts" : post,
+            "mainprofile" : mainprofile,
+            "allprofiles" : allprofiles,
         })
         
     messages.error(request, "Please login")
@@ -168,8 +171,6 @@ def find_user(request):
         queryset = User.objects.filter(username__icontains=username)
         profile = Profile.objects.all()
         followed = Follow_Unfollow.objects.get(user=request.user)
-        print(username)
-        print(followed.followed.all())
         return render(request, "userac/search.html",{
             "queryset" : queryset,
             "profile" : profile,
